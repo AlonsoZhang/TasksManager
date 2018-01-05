@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface TaskGet : NSObject{
-    
 }
-
+@property (nonatomic,strong ) NSArray *returnArr;
 - (id)init;
-- (void)queryPHPwithParameter:(NSString *)parameter withURL:(NSURL *)phpurl;
+- (BOOL)queryPHPwithParameter:(NSString *)parameter withURL:(NSURL *)phpurl;
 @end

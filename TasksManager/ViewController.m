@@ -14,6 +14,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     ConfigPlist = [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Config" ofType:@"plist"]];
+    dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss.sss"];
     runtimer = true;
     [self timerAction];
     NSTimer *timer = [NSTimer timerWithTimeInterval:5 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
@@ -23,19 +25,26 @@
 - (void)timerAction{
     if (runtimer){
         runtimer = false;
+        [self addLog:@"Start"];
         NSArray * taskArr = [[NSArray alloc]init];
         NSURL *phpURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/List_Task.php",[ConfigPlist objectForKey:@"phpURL"]]];
         if([self queryPHPwithParameter:nil withURL:phpURL]){
             NSDictionary *phpReturnDic = _phpReturnArr[0];
             if ([[phpReturnDic objectForKey:@"Result"] isEqualToString:@"Pass"]) {
                 taskArr = [phpReturnDic objectForKey:@"Data"];
+                dispatch_queue_t queue= dispatch_queue_create("test.queue", DISPATCH_QUEUE_CONCURRENT);//异步并行
                 for (NSDictionary *eachtaskDic in taskArr) {
                     //NSLog(@"%@",eachtaskDic);
-                    TaskGet *taskGet = [[TaskGet alloc]init];
-                    //http://10.42.222.70/DataMining/GET_Task.php?Task_ID=IT1111&Task_Type=IT-4
-                    NSString * parameter = [NSString stringWithFormat:@"Task_ID=%@&Task_Type=%@",[eachtaskDic objectForKey:@"Task_ID"],[eachtaskDic objectForKey:@"Task_Type"]];
-                    NSURL *phpGetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/GET_Task.php",[ConfigPlist objectForKey:@"phpURL"]]];
-                    [taskGet queryPHPwithParameter:parameter withURL:phpGetURL];
+                    dispatch_async(queue, ^{
+                        TaskGet *taskGet = [[TaskGet alloc]init];
+                        [self addLog:[NSString stringWithFormat:@"%@ start",[eachtaskDic objectForKey:@"Task_Type"]]];
+                        NSString * parameter = [NSString stringWithFormat:@"Task_ID=%@&Task_Type=%@",[eachtaskDic objectForKey:@"Task_ID"],[eachtaskDic objectForKey:@"Task_Type"]];
+                        NSURL *phpGetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/GET_Task.php",[ConfigPlist objectForKey:@"phpURL"]]];
+                        if([taskGet queryPHPwithParameter:parameter withURL:phpGetURL]){
+                            NSLog(@"%@",taskGet.returnArr);
+                            [self addLog:[NSString stringWithFormat:@"%@ end",[eachtaskDic objectForKey:@"Task_Type"]]];
+                        }
+                    });
                 }
             }
         }
@@ -65,6 +74,17 @@
     [task resume];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     return result;
+}
+
+- (void)addLog:(NSString *)log{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *dateStr = [dateFormat stringFromDate:[NSDate date]];
+        if (self.textView.string.length == 0) {
+            self.textView.string = [NSString stringWithFormat:@"%@ : %@",dateStr,log];
+        }else{
+            self.textView.string = [NSString stringWithFormat:@"%@\n%@ : %@",self.textView.string,dateStr,log];
+        }
+    });
 }
 
 - (void)setRepresentedObject:(id)representedObject {
