@@ -10,7 +10,7 @@
 
 @interface TaskGet : NSObject{
 }
-@property (nonatomic,strong ) NSArray *returnArr;
+@property (nonatomic,strong ) NSData *returnData;
 - (id)init;
 - (BOOL)queryPHPwithParameter:(NSString *)parameter withURL:(NSURL *)phpurl;
 @end

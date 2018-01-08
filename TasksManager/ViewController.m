@@ -32,6 +32,7 @@
             NSDictionary *phpReturnDic = _phpReturnArr[0];
             if ([[phpReturnDic objectForKey:@"Result"] isEqualToString:@"Pass"]) {
                 taskArr = [phpReturnDic objectForKey:@"Data"];
+                NSLog(@"%@",taskArr);
                 dispatch_queue_t queue= dispatch_queue_create("test.queue", DISPATCH_QUEUE_CONCURRENT);//异步并行
                 for (NSDictionary *eachtaskDic in taskArr) {
                     //NSLog(@"%@",eachtaskDic);
@@ -41,7 +42,8 @@
                         NSString * parameter = [NSString stringWithFormat:@"Task_ID=%@&Task_Type=%@",[eachtaskDic objectForKey:@"Task_ID"],[eachtaskDic objectForKey:@"Task_Type"]];
                         NSURL *phpGetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@/GET_Task.php",[ConfigPlist objectForKey:@"phpURL"]]];
                         if([taskGet queryPHPwithParameter:parameter withURL:phpGetURL]){
-                            NSLog(@"%@",taskGet.returnArr);
+                            NSArray *aaa = [NSJSONSerialization JSONObjectWithData:taskGet.returnData options:kNilOptions error:nil];
+                            NSLog(@"%@",aaa[0]);
                             [self addLog:[NSString stringWithFormat:@"%@ end",[eachtaskDic objectForKey:@"Task_Type"]]];
                         }
                     });
