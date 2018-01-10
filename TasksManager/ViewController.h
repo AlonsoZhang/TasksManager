@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MIC.h"
 
 @interface ViewController : NSViewController{
     NSMutableDictionary *ConfigPlist;

@@ -12,6 +12,7 @@
 		E237DA761FFCBF8100EE054E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E237DA751FFCBF8100EE054E /* Assets.xcassets */; };
 		E237DA791FFCBF8200EE054E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E237DA771FFCBF8200EE054E /* Main.storyboard */; };
 		E237DA7C1FFCBF8200EE054E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E237DA7B1FFCBF8200EE054E /* main.m */; };
+		E29E787C20030BA500239289 /* MIC.m in Sources */ = {isa = PBXBuildFile; fileRef = E29E787B20030BA500239289 /* MIC.m */; };
 		E2BC1E331FFDAEF20035BC24 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2BC1E321FFDAEF20035BC24 /* Config.plist */; };
 		E2BC1E361FFDCC210035BC24 /* TaskGet.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BC1E351FFDCC210035BC24 /* TaskGet.m */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,8 @@
 		E237DA7A1FFCBF8200EE054E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E237DA7B1FFCBF8200EE054E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E237DA7D1FFCBF8200EE054E /* TasksManager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TasksManager.entitlements; sourceTree = "<group>"; };
+		E29E787A20030BA400239289 /* MIC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIC.h; sourceTree = "<group>"; };
+		E29E787B20030BA500239289 /* MIC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIC.m; sourceTree = "<group>"; };
 		E2BC1E321FFDAEF20035BC24 /* Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		E2BC1E341FFDCC210035BC24 /* TaskGet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskGet.h; sourceTree = "<group>"; };
 		E2BC1E351FFDCC210035BC24 /* TaskGet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskGet.m; sourceTree = "<group>"; };
@@ -68,6 +71,8 @@
 				E237DA731FFCBF8100EE054E /* ViewController.m */,
 				E2BC1E341FFDCC210035BC24 /* TaskGet.h */,
 				E2BC1E351FFDCC210035BC24 /* TaskGet.m */,
+				E29E787A20030BA400239289 /* MIC.h */,
+				E29E787B20030BA500239289 /* MIC.m */,
 				E237DA751FFCBF8100EE054E /* Assets.xcassets */,
 				E237DA771FFCBF8200EE054E /* Main.storyboard */,
 				E2BC1E321FFDAEF20035BC24 /* Config.plist */,
@@ -149,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29E787C20030BA500239289 /* MIC.m in Sources */,
 				E237DA741FFCBF8100EE054E /* ViewController.m in Sources */,
 				E237DA7C1FFCBF8200EE054E /* main.m in Sources */,
 				E237DA711FFCBF8100EE054E /* AppDelegate.m in Sources */,

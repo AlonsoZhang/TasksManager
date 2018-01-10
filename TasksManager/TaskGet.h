@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface TaskGet : NSObject{
 }
 @property (nonatomic,strong ) NSData *returnData;
