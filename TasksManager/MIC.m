@@ -12,7 +12,6 @@
 
 //MICURL
 #define MICURL @"http://10.42.25.200"
-//#define MICURL @"http://d21-report.wks.wistron.com.cn"
 
 static MIC *sharedManager=nil;
 
